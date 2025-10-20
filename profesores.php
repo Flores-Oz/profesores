@@ -223,7 +223,8 @@ $flashMsg = $readFlash();
 <meta charset="utf-8">
 <title>Profesores · CRUD</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap local desde node_modules en la MISMA carpeta del proyecto -->
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <style>
   body { background:#f6f7fb; }
   .table thead th a { text-decoration:none; color:inherit; }
@@ -426,7 +427,8 @@ $flashMsg = $readFlash();
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap local desde node_modules en la MISMA carpeta del proyecto -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 /* Rellenar modal de edición con los datos de la fila */
 const modalEdit = document.getElementById('modalEdit');
@@ -443,9 +445,8 @@ modalEdit.addEventListener('show.bs.modal', event => {
       const val = (data['<?=h($f)?>'] ?? '');
       <?php if ($input === 'checkbox'): ?>
         el.checked = (String(val) === '1' || String(val).toLowerCase() === 'true');
-      <?php elseif ($input === 'datetime-local'):
-          // Normalizar si viene "YYYY-mm-dd HH:ii:ss"
-      ?>
+      <?php elseif ($input === 'datetime-local'): ?>
+        // Normalizar si viene "YYYY-mm-dd HH:ii:ss"
         if (val && val.length >= 16) {
           const norm = val.replace(' ', 'T').slice(0,16);
           el.value = norm;
